@@ -1,0 +1,79 @@
+html {
+  scroll-behavior: smooth;
+}
+.nav-logo-animation {
+  transition: transform 0.7s ease-in-out, scale 0.7s ease-in-out;
+}
+.nav-logo-animation:hover {
+  transform: rotate(-45deg);
+  scale: 1.5;
+}
+
+.card {
+  border: 0;
+  background: transparent;
+}
+
+.btn-cobaGratis {
+  transition: scale 0.7s ease-in-out;
+}
+
+.btn-cobaGratis:hover {
+  scale: 1.2;
+}
+
+.rounded-top {
+  border-top-left-radius: 120px !important;
+  border-top-right-radius: 120px !important;
+}
+
+@media only screen and (max-device-width: 414px) {
+  .rounded-top {
+    border-top-left-radius: 30px !important;
+    border-top-right-radius: 30px !important;
+  }
+}
+
+.tv-gradient {
+  text-transform: uppercase;
+  background: linear-gradient(to bottom, #cd00ff 0%, #000794 100%);
+  background-clip: text;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+@media only screen and (max-device-width: 540px) {
+  .responsive-center-items {
+    text-align: center;
+  }
+}
+
+.card-team-big {
+  border-radius: 5000px;
+}
+
+.team-items-overlay {
+  position: absolute;
+  width: 100%;
+  bottom: 0;
+  padding: 32px;
+  background-image: linear-gradient(to top, rgb(0, 0, 0, 80%), rgb(0, 0, 0, 50%), rgb(0, 0, 0, 00%));
+  -webkit-text-fill-color: white;
+}
+
+.card-rounded {
+  border-radius: 20%;
+  background: #73ad21;
+}
+
+.carousel-inner {
+  border-radius: 5%;
+  background-color: rgba(0, 0, 0, 0);
+  overflow: hidden;
+}
+
+.ic-card {
+  padding: 0;
+  font-size: 32px;
+  -webkit-text-fill-color: white;
+}
