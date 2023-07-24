@@ -4,7 +4,7 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-    <title>SLIP GAJI MDU</title>
+    <title>SURAT PERINGATAN MDU</title>
     <style>
         /* -------------------------------------
           GLOBAL RESETS

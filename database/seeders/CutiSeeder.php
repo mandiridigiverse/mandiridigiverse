@@ -42,26 +42,6 @@ class CutiSeeder extends Seeder
                     'tgl_ditolak_hrd' => $faker->date,
 
                 ]);
-            // foreach ($pegawai as $id_peg) {
-            //     for ($x = 1; $x <= 12; $x++) {
-            //         for ($i = 0; $i < 5; $i++) {
-            //             DB::table('cuti')->insert([
-            //                 'id_pegawai' => $id_peg,
-            //                 'tipe_cuti' => $tp_cuti[$faker->numberBetween(0, 4)],
-            //                 // 'tgl_pengajuan' => $faker->date,
-            //                 'tgl_pengajuan' => date("2021-$x-d"),
-            //                 'tgl_mulai' => date("2021-$x-d"),
-            //                 'tgl_selesai' => date("2021-$x-d"),
-            //                 'ket' => $faker->sentence(5),
-            //                 'status' => $stat[$faker->numberBetween(0, 4)],
-            //                 'tgl_disetujui_atasan' => $faker->date,
-            //                 'tgl_ditolak_atasan' => $faker->date,
-            //                 'tgl_disetujui_hrd' => $faker->date,
-            //                 'tgl_ditolak_hrd' => $faker->date,
-
-            //             ]);
-            //         }
-            //     }
-        }
+           }
     }
 }

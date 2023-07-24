@@ -24,7 +24,6 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\Dashboard;
 use App\Http\Controllers\PasswordController;
 use App\Http\Controllers\ForgotPasswordController;
-use App\Http\Controllers\GajiController;
 use App\Http\Controllers\Hrd\HrdDashboardController;
 use App\Http\Controllers\ManajemenPerusahaanController;
 use App\Http\Controllers\ManajemenRoleMenuController;
@@ -82,7 +81,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('/riwayatDivisi/search/', [SearchController::class, 'riwayatDivisi'])->name('riwayatDivisi.search');
     Route::get('/rekapPresensi/search/', [SearchController::class, 'rekapPresensi'])->name('rekapPresensi.search.pegawai');
     Route::get('/rekapCuti/search/', [SearchController::class, 'rekapCuti'])->name('rekapCuti.search.pegawai');
-    Route::get('/gaji/search/', [SearchController::class, 'gaji'])->name('gaji.search.pegawai');
     Route::get('/report/search/', [SearchController::class, 'report'])->name('report.search.pegawai');
     Route::get('/presensi/search/', [SearchController::class, 'presensi'])->name('presensi.search.data');
     Route::get('/cuti/search/', [SearchController::class, 'cuti'])->name('cuti.search.data');
