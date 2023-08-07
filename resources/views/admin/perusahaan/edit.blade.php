@@ -151,7 +151,7 @@
                 </div>
                 <div class="col-sm-12 text-bold text-center">
                     Email untuk aplikasi sistem ini wajib diatur seperti pada gambar berikut! <a
-                        href="https://i.postimg.cc/YSnTPQSd/Screenshot-from-2021-06-17-14-41-01.png" target="_blank">
+                        href="https://i.postimg.cc/2ykWdQjN/setting-email.png" target="_blank">
                         Link</a>
                 </div>
 

@@ -66,8 +66,8 @@ window.onscroll = function() {
           <div class="col-md-8 mb-4">
             <h1 class="text-title"><strong>Kembangkan bisnis, <br> usaha media kreatifmu</strong></h1>
             <p class="lead">Menjadi yang terbaik dengan solusi yang Kreatif <br />bersama Kami</p>
-            <a href="https://instagram.com/digiverse_id">
-              <button type="button" class="btn btn-warning rounded-pill btn-cobaGratis" target="_blank">Coba GRATIS!</button></a>
+            <a href="https://wa.me/6282126372886?text=Halo Kak Bryan!%0ASaya tertarik dan berminat untuk Mengembangkan Bisnis saya menggunakan jasa *Mandiri Digital Universe*%0ABoleh saya mendapatkan info lengkapnya?"            >
+              <button type="button" class="btn btn-warning rounded-pill btn-cobaGratis" target="_blank">Coba Sekarang!</button></a>
           </div>
           <div class="col">
             <img src="Icon/ic_CEO.png" alt="ic-CEO" width="350" height="350" class="img-fluid" />

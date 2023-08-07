@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost
--- Generation Time: Jul 07, 2023 at 05:54 AM
+-- Generation Time: Aug 07, 2023 at 04:21 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 8.2.4
 
@@ -63,9 +63,9 @@ CREATE TABLE `divisi` (
 
 INSERT INTO `divisi` (`id`, `nm_divisi`, `created_at`, `updated_at`) VALUES
 (1, 'Non-Divisi', NULL, NULL),
-(2, 'Business Development', NULL, NULL),
-(3, 'Finance', NULL, NULL),
-(4, 'Technology Officer', NULL, NULL);
+(2, 'Multimedia', NULL, NULL),
+(3, 'Tiktok', NULL, NULL),
+(4, 'Spotify', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1254,21 +1254,21 @@ INSERT INTO `icons` (`id`, `code`, `created_at`, `updated_at`) VALUES
 --
 
 CREATE TABLE `izin` (
-  `id` bigint(20) UNSIGNED NOT NULL DEFAULT 0,
+  `id` bigint(20) UNSIGNED NOT NULL,
   `id_pegawai` bigint(20) UNSIGNED NOT NULL,
-  `tipe_izin` enum('Sakit','Penting','Darurat') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `tipe_izin` enum('Tahunan','Besar','Bersama','Hamil','Sakit','Penting') NOT NULL,
   `tgl_pengajuan` date NOT NULL,
   `tgl_mulai` date NOT NULL,
   `tgl_selesai` date NOT NULL,
-  `ket` text CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
-  `status` enum('Disetujui HRD','Ditolak HRD','Disetujui Atasan','Ditolak Atasan','Diproses') CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci NOT NULL,
+  `ket` text NOT NULL,
+  `status` enum('Disetujui HRD','Ditolak HRD','Disetujui Atasan','Ditolak Atasan','Diproses') NOT NULL,
   `tgl_disetujui_atasan` date DEFAULT NULL,
   `tgl_disetujui_hrd` date DEFAULT NULL,
   `tgl_ditolak_atasan` date DEFAULT NULL,
   `tgl_ditolak_hrd` date DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- --------------------------------------------------------
 
@@ -1291,10 +1291,10 @@ INSERT INTO `jabatan` (`id`, `nm_jabatan`, `created_at`, `updated_at`) VALUES
 (1, 'Chief Executive Officer', NULL, NULL),
 (2, 'Head of Business Development', NULL, NULL),
 (3, 'Chief Technology Officer', NULL, NULL),
-(16, 'On The Job Training', NULL, '2023-07-06 19:26:39'),
-(27, 'Kepala Divisi', '2023-07-06 19:29:49', '2023-07-06 19:29:49'),
-(28, 'Supervisor', '2023-07-06 19:29:59', '2023-07-06 19:29:59'),
-(29, 'Staff Khusus', '2023-07-06 19:30:09', '2023-07-06 19:30:09');
+(4, 'Kepala Divisi', NULL, NULL),
+(5, 'Tim Khusus', NULL, NULL),
+(6, 'Supervisor', NULL, NULL),
+(7, 'On The Job Training', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1327,8 +1327,8 @@ INSERT INTO `menus` (`id`, `id_parent`, `judul`, `url`, `icon`, `id_hak_akses`, 
 (6, 3, 'Buat Pengajuan Cuti', 'staffCuti/create', NULL, 3, 5, NULL, NULL),
 (7, 3, 'Pengajuan Cuti (Tahap Atasan)', 'staffPengajuanCuti', NULL, 3, 6, NULL, NULL),
 (8, NULL, 'Manajemen Role & Menu', 'manajemen', 'icon-key', 4, 7, NULL, NULL),
-(9, NULL, 'Manajemen Perusahaan', 'perusahaan', ' icon-highlight', 14, 8, NULL, NULL),
-(10, NULL, 'Kebijakan Cuti & Jam Kantor', 'peraturan', 'icon-info3', 5, 9, NULL, NULL),
+(9, NULL, 'Manajemen Perusahaan', 'perusahaan', ' icon-highlight', 5, 8, NULL, NULL),
+(10, NULL, 'Kebijakan Cuti & Jam Kantor', 'peraturan', 'icon-info3', 13, 9, NULL, NULL),
 (11, NULL, 'Data Pegawai', 'pegawai', 'icon-users4', 6, 10, NULL, NULL),
 (12, NULL, 'Data Jabatan', NULL, 'icon-user-tie', 7, 11, NULL, NULL),
 (13, 12, 'List Data Jabatan', 'jabatan', NULL, 7, 12, NULL, NULL),
@@ -1344,9 +1344,9 @@ INSERT INTO `menus` (`id`, `id_parent`, `judul`, `url`, `icon`, `id_hak_akses`, 
 (23, 21, 'Atur Tanggal Cuti Bersama', 'cuti/cutiBersama', NULL, 10, 22, NULL, NULL),
 (24, 21, 'Pengajuan Cuti (Tahap HRD)', 'hrdPengajuanCuti', NULL, 10, 23, NULL, NULL),
 (25, 21, 'Rekapan Data Cuti Pegawai', 'rekapCuti', NULL, 10, 24, NULL, NULL),
-(30, NULL, 'Surat Peringatan', 'suratPeringatan', ' icon-file-text2', 12, 29, NULL, NULL),
-(31, NULL, 'Export Kinerja Pegawai', 'report', 'icon-magazine', 13, 30, NULL, NULL),
-(32, 3, 'Penilaian Karyawan', 'penilaian', NULL, 3, 31, NULL, NULL);
+(26, NULL, 'Surat Peringatan', 'suratPeringatan', NULL, 11, 25, NULL, NULL),
+(27, NULL, 'Export Kinerja Pegawai', 'report', 'icon-magazine', 12, 26, NULL, NULL),
+(28, NULL, 'Penilaian Karyawan', 'penilaian', NULL, 3, 27, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -1365,23 +1365,24 @@ CREATE TABLE `migrations` (
 --
 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES
-(23, '2014_10_12_000000_create_users_table', 1),
-(24, '2014_10_12_100000_create_password_resets_table', 1),
-(25, '2019_08_19_000000_create_failed_jobs_table', 1),
-(26, '2020_01_09_133758_create_permission_tables', 1),
-(27, '2021_02_27_143833_create_jabatans_table', 1),
-(28, '2021_02_27_144019_create_divisis_table', 1),
-(29, '2021_02_27_181740_create_pegawais_table', 1),
-(30, '2021_02_28_021611_create_cutis_table', 1),
-(31, '2021_02_28_021828_create_presensi_harians_table', 1),
-(32, '2021_02_28_022252_create_riwayat_jabatans_table', 1),
-(33, '2021_02_28_022637_create_riwayat_divisis_table', 1),
-(34, '2021_03_15_232901_create_peraturans_table', 1),
-(35, '2021_05_11_100655_create_menus_table', 1),
-(39, '2021_05_25_055722_create_surat_peringatans_table', 1),
-(42, '2021_06_03_050657_create_icons_table', 1),
-(43, '2021_06_15_063430_create_perusahaans_table', 1),
-(44, '2021_07_15_063302_create_penilaian_pegawais_table', 1);
+(1, '2023_07_09_000001_create_password_reset_table', 1),
+(2, '2023_07_09_000002_create_failed_jobs_table', 1),
+(3, '2023_07_09_000003_create_permission_tables', 1),
+(4, '2023_07_09_000004_create_jabatan_table', 1),
+(5, '2023_07_09_000005_create_divisi_table', 1),
+(6, '2023_07_09_000006_create_pegawai_table', 1),
+(7, '2023_07_09_000007_create_cuti_table', 1),
+(8, '2023_07_09_000008_create_presensi_harian_table', 1),
+(9, '2023_07_09_000009_create_riwayat_jabatan_table', 1),
+(10, '2023_07_09_000010_create_riwayat_divisi_table', 1),
+(11, '2023_07_09_000011_create_peraturan_table', 1),
+(12, '2023_07_09_000012_create_menu_table', 1),
+(13, '2023_07_09_000013_create_surat_peringatan_table', 1),
+(14, '2023_07_09_000014_create_icons_table', 1),
+(15, '2023_07_09_000015_create_perusahaan_table', 1),
+(16, '2023_07_09_000016_create_penilaian_pegawai_table', 1),
+(17, '2023_07_09_114705_create_izin_table', 1),
+(18, '2023_07_09_122510_create_akun_table', 1);
 
 -- --------------------------------------------------------
 
@@ -1412,13 +1413,10 @@ CREATE TABLE `model_has_roles` (
 --
 
 INSERT INTO `model_has_roles` (`role_id`, `model_type`, `model_id`) VALUES
-(1, 'App\\Models\\Pegawai', 23070001),
-(1, 'App\\Models\\Pegawai', 23070004),
-(1, 'App\\Models\\Pegawai', 23070005),
-(2, 'App\\Models\\Pegawai', 23070002),
-(2, 'App\\Models\\Pegawai', 23070006),
-(3, 'App\\Models\\Pegawai', 23070003),
-(3, 'App\\Models\\Pegawai', 23070007);
+(1, 'App\\Models\\Akun', 23080001),
+(1, 'App\\Models\\Pegawai', 23080001),
+(1, 'App\\Models\\Pegawai', 23080002),
+(3, 'App\\Models\\Pegawai', 23080003);
 
 -- --------------------------------------------------------
 
@@ -1437,8 +1435,11 @@ CREATE TABLE `password_resets` (
 --
 
 INSERT INTO `password_resets` (`email`, `token`, `created_at`) VALUES
-('bryan.bgv@nusamandiri.ac.id', 'KULxNsCVsjQL4NMrWPzVK3giT2yCMTHtUlud0FBofW5KMwdH25ozUVS72vsDGU', '2023-07-06 04:53:23'),
-('muhammadabi1404@gmail.com', 'ck7PkldrntczXYtbFqsi1Dncr0ThWangOWCP2C2ChzEUouIk6wt4Y1PYUfgZzX', '2023-07-06 19:46:08');
+('mandiridigiverse@gmail.com', 'JB43N3oDsOxIBIhI9iXvpkdgKnkv7hXvGSKPqQuzh5abmz2MauML2PNyPVM3qd', '2023-08-06 18:42:34'),
+('mandiridigiverse@gmail.com', 'AlUBfUhWBdUXloorWs5AGm5ZpuvJ1FdqD7O60EUlYZ11cANCQ1fWfvM3SQxU5M', '2023-08-06 18:47:49'),
+('xealx14@gmail.com', 'BNMbIiKvYCJlS6qJNGXgXXJ3MRNqQHuxFUotKXxzMaAw7yD2V5QECrawQyCHFx', '2023-08-06 18:54:39'),
+('xealx14@gmail.com', 'SK8ytOSONBHCIRXBKjiPGOxx8y32k4Jc6zwc3bOc332mo2zEKCaQgViWwSteOp', '2023-08-06 18:56:08'),
+('xealx14@gmail.com', 'cnffIDN6uUagAQ0RA5yO7xxDXIy9YxHZ9zJGtGfsKOBa0S81y4lTAIswFX616n', '2023-08-06 18:56:25');
 
 -- --------------------------------------------------------
 
@@ -1478,10 +1479,8 @@ CREATE TABLE `pegawai` (
 --
 
 INSERT INTO `pegawai` (`id`, `id_role`, `ninduk`, `nama`, `jk`, `agama`, `tempat_lahir`, `tgl_lahir`, `alamat_ktp`, `alamat_dom`, `status`, `jml_anak`, `no_hp`, `email`, `password`, `tgl_masuk`, `id_atasan`, `id_jabatan`, `id_divisi`, `path`, `remember_token`, `created_at`, `updated_at`, `deleted_at`) VALUES
-(23070001, 1, '123', 'Mala Zizi Lailasari', 'Pria', 'Kristen', 'Binjai', '1999-06-20', 'Ki. Panjaitan No. 864', 'Kpg. Peta No. 496', 'Menikah', 1, '0845 6348 7404', 'admin@gmail.com', '$2y$10$P88IrZ7/9.mOEverKfzVWujCudbp2iQ5EIihPrEvPnJt27EWMx..6', '2019-04-24', NULL, NULL, 3, 'foto.jpg', NULL, '2023-07-06 17:40:38', '2023-07-06 18:13:52', NULL),
-(23070002, 2, '1971842303226739', 'Ami Chelsea Laksmiwati', 'Pria', 'Kristen', 'Tarakan', '1999-12-12', 'Psr. Suniaraja No. 506', 'Ds. Baranang No. 980', 'Menikah', 1, '(+62) 598 9205 7334', 'hrd@gmail.com', '$2y$10$KJdsXw.cn5eI/6nxL0pxieaGXnHmLov3hdyH.qTKkomHnhlHjf0GS', '2006-11-19', NULL, NULL, 3, 'foto.jpg', NULL, '2023-07-06 17:40:38', '2023-07-06 17:40:38', NULL),
-(23070003, 3, '3575096211933156', 'Maman Balijan Sitorus', 'Pria', 'Katholik', 'Tanjungbalai', '1993-07-28', 'Psr. Pintu Besar Selatan No. 311', 'Jln. Sugiyopranoto No. 237', 'Menikah', 2, '0376 4203 5557', 'staff@gmail.com', '$2y$10$nG/pvmHCCfDqCfnWYTW4iu3UL/3ZQ94CGXohPDSdzuqGBlnO.yAR.', '1980-06-05', NULL, NULL, 4, 'foto.jpg', NULL, '2023-07-06 17:40:38', '2023-07-06 17:40:38', NULL),
-(23070004, 1, '3175041404011001', 'Mohamad Abi', 'Pria', 'Islam', 'Jakarta', '2001-04-14', 'dukuh 1', 'dukuh 1', 'Lajang', 0, '087776663404', 'muhammadabi1404@gmail.com', '$2y$10$xBi5QrFBEumKg8GDoIMlY.a5O2RUH4yNwAg/9Od7TIyACDMX0RvJa', '2023-07-07', NULL, 3, 1, '3175041404011001_0707230224.png', NULL, '2023-07-06 19:24:44', '2023-07-06 19:44:03', NULL);
+(23080002, 1, '3175040404', 'Bryan Givan, S.E, M.M', 'Pria', 'Islam', 'bali', '2023-08-06', 'asda', 'asdasd', 'Menikah', 2, '0821-2637-2886', 'xealx14@gmail.com', '$2y$10$sZSGPydZ107pNvFpWOYNY.8rB1VJHcSqx0oIMjwzy79HV/xWYK3wO', '2023-08-07', NULL, 1, 1, '3175040404_0708230128.jpg', NULL, '2023-08-06 18:28:28', '2023-08-06 18:28:28', NULL),
+(23080003, 3, '3175041404011001', 'Mohamad Abi', 'Pria', 'Islam', 'Jakarta Timur', '2001-04-14', 'jl.dukuh 1 no.58', 'jl.dukuh 1 no.58', 'Lajang', 0, '087776663404', 'muhammadabi1404@gmail.com', '$2y$10$sEkYmlclRZqumR67hsjfe.IaOxHy60WEwIbZjOxNA.slaScnBvD8q', '2023-08-07', 23080002, 3, 1, '3175041404011001_0708230137.jpg', NULL, '2023-08-06 18:37:15', '2023-08-06 18:37:15', NULL);
 
 -- --------------------------------------------------------
 
@@ -1502,13 +1501,6 @@ CREATE TABLE `penilaian_pegawai` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `penilaian_pegawai`
---
-
-INSERT INTO `penilaian_pegawai` (`id`, `id_pegawai`, `tanggal`, `responsible`, `initiate`, `teamwork`, `discipline`, `work_performance`, `final_value`, `created_at`, `updated_at`) VALUES
-(1, 23070004, '2023-07-07', 100, 100, 100, 100, 100, 100, '2023-07-06 19:37:49', '2023-07-06 19:37:49');
 
 -- --------------------------------------------------------
 
@@ -1558,19 +1550,19 @@ CREATE TABLE `permissions` (
 --
 
 INSERT INTO `permissions` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'dashboard-admin', 'web', '2023-07-05 22:43:11', '2023-07-05 22:43:11'),
-(2, 'dashboard-hrd', 'web', '2023-07-05 22:43:11', '2023-07-05 22:43:11'),
-(3, 'menu-staff', 'web', '2023-07-05 22:43:11', '2023-07-05 22:43:11'),
-(4, 'manajemen-role', 'web', '2023-07-05 22:43:11', '2023-07-05 22:43:11'),
-(5, 'menu-kebijakan-kantor', 'web', '2023-07-05 22:43:11', '2023-07-05 22:43:11'),
-(6, 'menu-pegawai', 'web', '2023-07-05 22:43:11', '2023-07-05 22:43:11'),
-(7, 'menu-jabatan', 'web', '2023-07-05 22:43:11', '2023-07-05 22:43:11'),
-(8, 'menu-divisi', 'web', '2023-07-05 22:43:11', '2023-07-05 22:43:11'),
-(9, 'menu-presensi', 'web', '2023-07-05 22:43:11', '2023-07-05 22:43:11'),
-(10, 'menu-cuti', 'web', '2023-07-05 22:43:11', '2023-07-05 22:43:11'),
-(12, 'menu-surat-peringatan', 'web', '2023-07-05 22:43:11', '2023-07-05 22:43:11'),
-(13, 'menu-export-kinerja', 'web', '2023-07-05 22:43:11', '2023-07-05 22:43:11'),
-(14, 'manajemen-perusahaan', 'web', '2023-07-05 22:43:11', '2023-07-05 22:43:11');
+(1, 'dashboard-admin', 'web', '2023-08-06 18:18:08', '2023-08-06 18:18:08'),
+(2, 'dashboard-hrd', 'web', '2023-08-06 18:18:08', '2023-08-06 18:18:08'),
+(3, 'menu-staff', 'web', '2023-08-06 18:18:08', '2023-08-06 18:18:08'),
+(4, 'manajemen-role', 'web', '2023-08-06 18:18:08', '2023-08-06 18:18:08'),
+(5, 'menu-kebijakan-kantor', 'web', '2023-08-06 18:18:08', '2023-08-06 18:18:08'),
+(6, 'menu-pegawai', 'web', '2023-08-06 18:18:08', '2023-08-06 18:18:08'),
+(7, 'menu-jabatan', 'web', '2023-08-06 18:18:08', '2023-08-06 18:18:08'),
+(8, 'menu-divisi', 'web', '2023-08-06 18:18:08', '2023-08-06 18:18:08'),
+(9, 'menu-presensi', 'web', '2023-08-06 18:18:08', '2023-08-06 18:18:08'),
+(10, 'menu-cuti', 'web', '2023-08-06 18:18:08', '2023-08-06 18:18:08'),
+(11, 'menu-surat-peringatan', 'web', '2023-08-06 18:18:08', '2023-08-06 18:18:08'),
+(12, 'menu-export-kinerja', 'web', '2023-08-06 18:18:08', '2023-08-06 18:18:08'),
+(13, 'manajemen-perusahaan', 'web', '2023-08-06 18:18:08', '2023-08-06 18:18:08');
 
 -- --------------------------------------------------------
 
@@ -1597,7 +1589,7 @@ CREATE TABLE `perusahaan` (
 --
 
 INSERT INTO `perusahaan` (`id`, `nama`, `alamat`, `kota`, `no_telp`, `email_public`, `path_logo`, `email_private`, `password`, `created_at`, `updated_at`) VALUES
-(1, 'Mandiri Digital Universe', 'jtw', 'jakarta timur', '0', 'infokami@mdudigitaluniverse.com', 'logo_0607230546.png', 'infokami@mdudigitaluniverse.com', '$2y$10$dxupJbygOwqovseDgr6fa.aVqcsQ9wwdhQKXsqaM1L3RN9lueU61q', '2023-07-05 22:46:52', '2023-07-05 22:46:52');
+(1, 'Mandiri Digital Universe', 'Gedung Nusa Mandiri Tower, Jl. Raya Jatiwaringin No.02, RT.8/RW.13, Cipinang Melayu, Kec. Makasar, Daerah Khusus Ibukota Jakarta 13620', 'Jakarta Timur', '0821-2637-2886', 'mandiridigiverse@gmail.com', 'logo_0708230122.jpg', 'info@mdudigitaluniverse.com', '$2y$10$iuIbtIpax7038XMHCEuMOumG6SxodC8ZDiqT0iFPH3PL9aDbytyWS', '2023-08-06 18:22:20', '2023-08-06 18:22:20');
 
 -- --------------------------------------------------------
 
@@ -1616,13 +1608,6 @@ CREATE TABLE `presensi_harian` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `presensi_harian`
---
-
-INSERT INTO `presensi_harian` (`id`, `id_pegawai`, `tanggal`, `ket`, `jam_dtg`, `jam_plg`, `is_wfh`, `created_at`, `updated_at`) VALUES
-(1, 23070004, '2023-04-14', 'Hadir', '07:00:00', '16:30:00', 1, '2023-07-06 19:34:11', '2023-07-06 19:34:11');
 
 -- --------------------------------------------------------
 
@@ -1644,8 +1629,8 @@ CREATE TABLE `riwayat_divisi` (
 --
 
 INSERT INTO `riwayat_divisi` (`id`, `id_pegawai`, `id_divisi`, `tgl_mulai`, `created_at`, `updated_at`) VALUES
-(5, 23070001, 3, '2023-07-07', '2023-07-06 18:13:52', '2023-07-06 18:13:52'),
-(6, 23070004, 1, '2023-07-07', '2023-07-06 19:24:44', '2023-07-06 19:24:44');
+(1, 23080002, 1, '2023-08-07', '2023-08-06 18:28:28', '2023-08-06 18:28:28'),
+(2, 23080003, 1, '2023-08-07', '2023-08-06 18:37:15', '2023-08-06 18:37:15');
 
 -- --------------------------------------------------------
 
@@ -1667,7 +1652,8 @@ CREATE TABLE `riwayat_jabatan` (
 --
 
 INSERT INTO `riwayat_jabatan` (`id`, `id_pegawai`, `id_jabatan`, `tgl_mulai`, `created_at`, `updated_at`) VALUES
-(6, 23070004, 3, '2023-07-07', '2023-07-06 19:24:44', '2023-07-06 19:24:44');
+(1, 23080002, 1, '2023-08-07', '2023-08-06 18:28:28', '2023-08-06 18:28:28'),
+(2, 23080003, 3, '2023-08-07', '2023-08-06 18:37:15', '2023-08-06 18:37:15');
 
 -- --------------------------------------------------------
 
@@ -1688,9 +1674,9 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `name`, `guard_name`, `created_at`, `updated_at`) VALUES
-(1, 'ADMIN', 'web', '2023-07-05 22:43:11', '2023-07-05 22:43:11'),
-(2, 'HRD', 'web', '2023-07-05 22:43:11', '2023-07-05 22:43:11'),
-(3, 'STAFF', 'web', '2023-07-05 22:43:11', '2023-07-05 22:43:11');
+(1, 'ADMIN', 'web', '2023-08-06 18:18:08', '2023-08-06 18:18:08'),
+(2, 'HRD', 'web', '2023-08-06 18:18:08', '2023-08-06 18:18:08'),
+(3, 'STAFF', 'web', '2023-08-06 18:18:08', '2023-08-06 18:18:08');
 
 -- --------------------------------------------------------
 
@@ -1709,7 +1695,6 @@ CREATE TABLE `role_has_permissions` (
 
 INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (1, 1),
-(2, 1),
 (2, 2),
 (3, 1),
 (3, 2),
@@ -1725,12 +1710,10 @@ INSERT INTO `role_has_permissions` (`permission_id`, `role_id`) VALUES
 (10, 1),
 (10, 2),
 (11, 1),
-(11, 2),
 (12, 1),
 (12, 2),
 (13, 1),
-(13, 2),
-(14, 1);
+(13, 2);
 
 -- --------------------------------------------------------
 
@@ -1747,32 +1730,6 @@ CREATE TABLE `surat_peringatan` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `users`
---
-
-CREATE TABLE `users` (
-  `id` bigint(20) UNSIGNED NOT NULL,
-  `id_role` bigint(255) UNSIGNED DEFAULT NULL,
-  `name` varchar(255) NOT NULL,
-  `username` varchar(255) NOT NULL,
-  `email` varchar(255) NOT NULL,
-  `email_verified_at` timestamp NULL DEFAULT NULL,
-  `password` varchar(255) NOT NULL,
-  `remember_token` varchar(100) DEFAULT NULL,
-  `created_at` timestamp NULL DEFAULT NULL,
-  `updated_at` timestamp NULL DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data for table `users`
---
-
-INSERT INTO `users` (`id`, `id_role`, `name`, `username`, `email`, `email_verified_at`, `password`, `remember_token`, `created_at`, `updated_at`) VALUES
-(4, 1, 'ini akun Admin', 'superAdmin', 'admin@admin.com', NULL, '$2y$10$Rv2twr0NWCHXe3/4dNw53O9lnWcKBC2/dBwC.ztziYQBFBks6MXu.', NULL, '2023-07-06 17:17:51', '2023-07-06 17:17:51');
 
 --
 -- Indexes for dumped tables
@@ -1803,6 +1760,13 @@ ALTER TABLE `failed_jobs`
 --
 ALTER TABLE `icons`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `izin`
+--
+ALTER TABLE `izin`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `izin_id_pegawai_index` (`id_pegawai`);
 
 --
 -- Indexes for table `jabatan`
@@ -1849,7 +1813,7 @@ ALTER TABLE `password_resets`
 --
 ALTER TABLE `pegawai`
   ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `pegawai_nik_unique` (`ninduk`),
+  ADD UNIQUE KEY `pegawai_ninduk_unique` (`ninduk`),
   ADD UNIQUE KEY `pegawai_email_unique` (`email`),
   ADD KEY `pegawai_id_jabatan_index` (`id_jabatan`),
   ADD KEY `pegawai_id_divisi_index` (`id_divisi`),
@@ -1928,15 +1892,6 @@ ALTER TABLE `surat_peringatan`
   ADD PRIMARY KEY (`id`),
   ADD KEY `surat_peringatan_id_pegawai_index` (`id_pegawai`);
 
-
---
--- Indexes for table `users`
---
-ALTER TABLE `users`
-  ADD PRIMARY KEY (`id`),
-  ADD UNIQUE KEY `users_username_unique` (`username`),
-  ADD UNIQUE KEY `users_email_unique` (`email`);
-
 --
 -- AUTO_INCREMENT for dumped tables
 --
@@ -1945,7 +1900,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `cuti`
 --
 ALTER TABLE `cuti`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `divisi`
@@ -1966,34 +1921,40 @@ ALTER TABLE `icons`
   MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1146;
 
 --
+-- AUTO_INCREMENT for table `izin`
+--
+ALTER TABLE `izin`
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
+
+--
 -- AUTO_INCREMENT for table `jabatan`
 --
 ALTER TABLE `jabatan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `menus`
 --
 ALTER TABLE `menus`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `migrations`
 --
 ALTER TABLE `migrations`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `pegawai`
 --
 ALTER TABLE `pegawai`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23070008;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23080004;
 
 --
 -- AUTO_INCREMENT for table `penilaian_pegawai`
 --
 ALTER TABLE `penilaian_pegawai`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `peraturan`
@@ -2005,7 +1966,7 @@ ALTER TABLE `peraturan`
 -- AUTO_INCREMENT for table `permissions`
 --
 ALTER TABLE `permissions`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `perusahaan`
@@ -2017,19 +1978,19 @@ ALTER TABLE `perusahaan`
 -- AUTO_INCREMENT for table `presensi_harian`
 --
 ALTER TABLE `presensi_harian`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `riwayat_divisi`
 --
 ALTER TABLE `riwayat_divisi`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `riwayat_jabatan`
 --
 ALTER TABLE `riwayat_jabatan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `roles`
@@ -2041,13 +2002,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `surat_peringatan`
 --
 ALTER TABLE `surat_peringatan`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
-
---
--- AUTO_INCREMENT for table `users`
---
-ALTER TABLE `users`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- Constraints for dumped tables
@@ -2058,6 +2013,12 @@ ALTER TABLE `users`
 --
 ALTER TABLE `cuti`
   ADD CONSTRAINT `cuti_id_pegawai_foreign` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Constraints for table `izin`
+--
+ALTER TABLE `izin`
+  ADD CONSTRAINT `izin_id_pegawai_foreign` FOREIGN KEY (`id_pegawai`) REFERENCES `pegawai` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Constraints for table `menus`

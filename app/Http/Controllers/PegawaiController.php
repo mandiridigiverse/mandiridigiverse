@@ -94,8 +94,7 @@ class PegawaiController extends Controller
 
         $extension = $request->file('imgupload')->extension();
         $imgname = $request->ninduk . '_' . date('dmyHi') . '.' . $extension;
-        $path = Storage::putFileAs('public/images', $request->file('imgupload'), $imgname);
-        $id = IdGenerator::generate(['table' => 'pegawai', 'length' => 8, 'prefix' => date('ym')]);
+        $path = Storage::putFileAs('public/images', $request->file('imgupload'), $imgname);        $id = IdGenerator::generate(['table' => 'pegawai', 'length' => 8, 'prefix' => date('ym')]);
         $password = bcrypt("$request->ninduk");
         $riwayat_jabatan = Riwayat_jabatan::where('id_pegawai', $id)
             ->where('id_jabatan', $request->id_jabatan)
